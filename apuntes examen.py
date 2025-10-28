@@ -1100,3 +1100,72 @@ while frase[0] == " ":
     frase = frase[1:]
 frase = frase[::-1]
 print(frase)
+
+#find / index
+#Localizar subcadena
+#s.find('x'), s.index('x')
+
+#startswith / endswith
+#Comprobar inicio/fin
+#s.startswith('Hola')
+
+#format / f-strings
+#string formateada
+#f"Hola {name}", "{} {}".format(a,b)
+
+#Escapes / nuevas líneas
+#salto de línea, tab
+#\n, \t, \\
+
+#Modificar elemento
+#mi_lista[1] = 99
+#Cambiar el valor en una posición
+
+#mi_lista.append(4)
+#Agregar un elemento al final
+
+#mi_lista.insert(1, "nuevo")
+#Insertar un valor en una posición específica
+
+#mi_lista.remove(2)
+#Eliminar la primera ocurrencia de un valor
+#mi_lista.pop(0)
+#Eliminar y devolver el valor en una posición
+#mi_lista.clear()
+#Eliminar todos los elementos
+#copia = mi_lista.copy()
+#Crear una copia independiente
+#mi_lista.reverse()
+#Invertir el orden de los elementos
+#mi_lista.count(3)
+#Contar cuántas veces aparece un valor
+#mi_lista.index(3)
+#Obtener la posición de un valor
+#3 in mi_lista
+#Saber si un valor está en la lista
+#mi_lista[1:4]
+#lista[::-1] invierte
+#Obtener una sublista desde el índice 1 al 3
+#for x in mi_lista:
+#Iterar sobre todos los elementos
+#mi_tupla[0]
+#Obtener el primer elemento
+#mi_tupla.count(2)
+#Contar cuántas veces aparece un valor
+#mi_tupla.index(2)
+#Obtener la posición de un valor
+#2 in mi_tupla
+#Saber si un valor está en la tupla
+#mi_tupla[1:3]
+#Obtener una subtupla desde el índice 1 al 2
+#for x in mi_tupla:
+#Iterar sobre todos los elementos
+
+
+
+
+
+
+
+
+
