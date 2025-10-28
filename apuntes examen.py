@@ -1027,24 +1027,21 @@ print(passwd)
 
 #GENERADOR DE CONTRASEÑAS PIDIENDO YO EL DÍGITO:
 import random
-def xeradorContrasinais(n):
-    l = ['1234567890', 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '!@#$%^&*()_+-=[]{};:,.<>/?']
-    i=0
-    contrasinal=''
-    while i<n:
-        tipo = random.randint(0,3)
-        iSim = random.randint(0,len(l[tipo])-1)
-        contrasinal = contrasinal + l[tipo][iSim]
-        i+=1
-    return contrasinal
+def contraseña(numero):
+    contra = ""
+    i = 0
+    while i < numero:
+        contra += chr(random.randint(33, 126))
+        i += 1
+    return contra
 while True:
-    n = int(input("Introduce un numero para xerar a lonxitude do contrasinal: "))
-    if n >= 6 and n <=12:
-        print(xeradorContrasinais(n))
-    elif n ==0:
+    numero = int(input("Dime la longitud de la contraseña: "))
+    if 6 <= numero <= 12:
+        print("Contraseña generada:", contraseña(numero))
+    elif numero == 0:
         break
     else:
-        print("a lonxitude valida es entre 6 e 12")
+        print("La longitud tiene que ser entre 6 y 12")
 
 #LISTA DE LA COMPRA:
 list_compra = ['Limones', 'Naranjas', 'Queso', 'Pavo']
