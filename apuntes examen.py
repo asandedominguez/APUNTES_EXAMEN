@@ -386,7 +386,7 @@ caracteres = str(input("Dame una cadena de carcateres: "))
 def operacion(caracteres):
     list(caracteres)
     print(caracteres[:2])
-    print(caracteres[:3])
+    print(caracteres[-3:])
     print(caracteres[::2])
     print(caracteres+caracteres[::-1])
 operacion(caracteres)
