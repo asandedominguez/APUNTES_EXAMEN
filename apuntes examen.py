@@ -1157,7 +1157,65 @@ print(frase)
 #Obtener una subtupla desde el índice 1 al 2
 #for x in mi_tupla:
 #Iterar sobre todos los elementos
+numero = float(input("Introduce un número: "))
 
+raiz = numero ** 0.5
+raiz_entera = round(raiz)
+resto = numero -(raiz_entera ** 2)
+
+print("Número:", numero)
+print("Raíz cuadrada aproximada:", raiz)
+print("Raíz cuadrada entera más cercana:", raiz_entera)
+print("Resto (diferencia con su cuadrado):", resto)
+def main():
+    hora = int(input("Introduce las horas: "))
+    minuto = int(input("Introduce los minutos: "))
+    segundo = int(input("Introduce los segundos: "))
+    segundos_mas = int(input(f"Introduce los segundos que le quieres añadir a la hora ({hora}:{minuto}:{segundo}): "))
+
+    while segundos_mas >= 60:
+        minuto += 1
+        segundos_mas -= 60
+
+    while segundo + segundos_mas >= 60:
+        segundo = segundo + segundos_mas - 60
+        minuto += 1
+        segundos_mas = 0
+
+    segundo += segundos_mas
+
+    while minuto >= 60:
+        minuto -= 60
+        hora += 1
+
+    print(f"La hora actual es: {hora}:{minuto}:{segundo}")
+
+if __name__ == "__main__":
+    main()
+
+def main():
+    n = int(input("Escriba un número natural para saber su raíz cuadrada entera y su resto (si lo tiene): "))
+
+    if n < 0:
+        print("Error: la raíz cuadrada no está definida para números negativos.")
+        return
+
+    raiz_entera = 0
+    while (raiz_entera + 1) ** 2 <= n:
+        raiz_entera += 1
+
+    cuadrado = raiz_entera ** 2
+    resto = n - cuadrado
+
+    if resto == 0:
+        print(f"La raíz cuadrada de {n} es exacta: {raiz_entera}")
+    else:
+        print(f"La raíz entera más cercana de {n} es: {raiz_entera}")
+        print(f"El cuadrado de {raiz_entera} es: {cuadrado}")
+        print(f"El resto es: {resto}")
+
+if __name__ == "__main__":
+    main()
 
 
 
