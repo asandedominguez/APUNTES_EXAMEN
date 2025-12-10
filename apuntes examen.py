@@ -17,7 +17,10 @@ elif n >= 11 and n < 20:
 elif n >=20 and n < 100:
     r1 =  n//10
     r2 = n%10
-    print(f[r1], "y", p[r2])
+    if r2 ==0:
+        print(f[r1])
+    else:
+        print(f[r1], "y", p[r2])
 
 #DNI predicción
 l = ["T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"]
@@ -1100,3 +1103,804 @@ while frase[0] == " ":
     frase = frase[1:]
 frase = frase[::-1]
 print(frase)
+
+
+#CLASEEEEES
+#AÑO BISIESTO METODO:
+class Data:
+    def __init__(self, day, month, year):
+        self.__day = None
+        self.__month = None
+        self.__year = None
+
+        self.setAno(year)
+        self.setMes(month)
+        self.setDia(day)
+
+    def setDia(self, day):
+        diasmes = {
+            1: 31, 2: 28, 3: 31, 4: 30,
+            5: 31, 6: 30, 7: 31, 8: 31,
+            9: 30, 10: 31, 11: 30, 12: 31
+        }
+
+        if self.__month is None or self.__year is None:
+            self.__day = None
+            return
+
+        if self.__month == 2 and self.eBisiesto(self.__year):
+            if 1 <= day <= 29:
+                self.__day = day
+            else:
+                self.__day = None
+        else:
+            if 1 <= day <= diasmes[self.__month]:
+                self.__day = day
+            else:
+                self.__day = None
+
+    def getDia(self):
+        return self.__day
+
+    def setMes(self, month):
+        if 1 <= month <= 12 and self.__year is not None:
+            self.__month = month
+        else:
+            self.__month = None
+
+    def getMes(self):
+        return self.__month
+
+    def setAno(self, year):
+        if year >= 0:
+            self.__year = year
+        else:
+            self.__year = None
+
+    def getAno(self):
+        return self.__year
+
+    def eBisiesto(self, year):
+        if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+            return True
+        return False
+
+    def esFechaValida(self):
+        if self.__day is None or self.__month is None or self.__year is None:
+            return False
+
+        diasmes = {
+            1: 31, 2: 28, 3: 31, 4: 30,
+            5: 31, 6: 30, 7: 31, 8: 31,
+            9: 30, 10: 31, 11: 30, 12: 31
+        }
+
+        if self.__month == 2 and self.eBisiesto(self.__year):
+            return self.__day <= 29
+
+        return self.__day <= diasmes[self.__month]
+
+    def __str__(self):
+        return f"A data é {self.__day}/{self.__month}/{self.__year}"
+
+
+fechas = [
+    Data(29, 2, 2024),
+    Data(29, 2, 2023),
+    Data(31, 4, 2023),
+    Data(15, 10, 2023),
+]
+
+for f in fechas:
+    print(f)
+    if f.esFechaValida():
+        print("✅ Fecha válida")
+    else:
+        print("❌ Fecha inválida")
+    print("---")
+
+#RESOLUCIÓOOOOOOOOOOON
+from bisiesto import Data
+
+f1 = Data(29,2,2017)
+f2 = Data(30,4,2021)
+f3 = Data(29,2,2024)
+f4 = Data(1,1,2000)
+f5 = Data(30,2,2019)
+
+
+print(f1.esValido())
+print(f2.esValido())
+print(f3.esValido())
+print(f4.esValido())
+print(f5.esValido())
+
+f5.month = 15
+print (f5.month)
+
+
+#BOMBILLA (ON-OFF) ESTADO DE ALGO METODO
+class Bombilla:
+    def __init__(self, estado):
+        self.__estado = estado
+
+    def setEstado(self, estado):
+        self.__estado = estado
+    def getEstado(self):
+        return self.__estado
+
+    def acende(self):
+        if self.__estado == "ON":
+            self.__estado = "ON"
+        if self.__estado == "OFF":
+            self.__estado = "ON"
+
+    def apaga(self):
+        if self.__estado == "OFF":
+            self.__estado = "OFF"
+        if self.__estado == "ON":
+            self.__estado = "OFF"
+
+    def interuptor(self):
+        if self.__estado == "OFF":
+            self.__estado = "ON"
+        if self.__estado == "ON":
+            self.__estado = "OFF"
+
+#RESOLUCIOOOOOOON
+from Bombilla import Bombilla
+
+
+bombilla1 = Bombilla("ON")
+print(bombilla1.getEstado())
+
+bombilla1.setEstado("OFF")
+print(bombilla1.getEstado())
+
+bombilla1.setEstado("OFF")
+print(bombilla1.getEstado())
+
+
+#CILINDRO
+import math
+
+class Punto:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def toString(self):
+        return f"Punto: x = {self.x}, y = {self.y}\n"
+
+class Cilindro(Punto):
+    def __init__(self, x, y, radio, altura):
+        super().__init__(x, y)
+        self.radio = abs(radio)
+        self.altura = altura
+
+    def calcularArea(self):
+        return 2 * math.pi * self.radio * (self.radio + self.altura)
+
+    def calcularVolumen(self):
+        return math.pi * (self.radio**2) * self.altura
+
+    def toString(self):
+        cadena = super().toString()
+        cadena += f"Cilindro: radio = {self.radio}, altura = {self.altura}\n"
+        return cadena
+
+
+c = Cilindro(5, 10, 3, 7)
+
+print(c.toString())
+
+print(f"Área del cilindro: {c.calcularArea():.2f}")
+print(f"Volumen del cilindro: {c.calcularVolumen():.2f}")
+
+
+#CIRCULO
+import math
+
+class Punto:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def toString(self):
+        return f"Punto: x = {self.x}, y = {self.y}"
+
+class Circulo(Punto):
+    def __init__(self, x, y, radio):
+        super().__init__(x, y)
+        self.radio = abs(radio)
+
+    def obtenerDiametro(self):
+        return self.radio * 2
+
+    def calcularPerimetro(self):
+        return 2 * math.pi * self.radio
+
+    def calcularArea(self):
+        return math.pi * (self.radio ** 2)
+
+    def tostring(self):
+        cadea = super().toString() + f" \nRadio: {self.radio}"
+        return cadea
+
+c = Circulo(4, 5, 3)
+print(c.tostring())
+print(f"Diámetro: {c.obtenerDiametro()}")
+print(f"Perímetro: {c.calcularPerimetro():.2f}")
+print(f"Área: {c.calcularArea():.2f}")
+
+
+#CONO
+import math
+
+class Punto:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def toString(self):
+        return f"Punto: x = {self.x}, y = {self.y}\n"
+
+class Cono(Punto):
+    def __init__(self, x, y, radio, altura):
+        super().__init__(x, y)
+        self.radio = abs(radio)
+        self.altura = altura
+
+    def calcularArea(self):
+        return math.pi * self.radio * (self.radio + math.sqrt(self.radio**2 + self.altura**2))
+
+    def calcularVolumen(self):
+        return (1/3) * math.pi * (self.radio**2) * self.altura
+
+    def toString(self):
+        return super().toString() + f"Cono: radio = {self.radio}, altura = {self.altura}"
+
+c = Cono(3, 4, 5, 6)
+print(c.toString())
+print(f"Área del cono: {c.calcularArea():.2f}")
+print(f"Volumen del cono: {c.calcularVolumen():.2f}")
+
+
+#COORDENADAS
+class Punto2:
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
+
+    def setX(self, x):
+        if type(x) == int or type(x) == float:
+            if x >= 0:
+                self.__x = x
+            else:
+                self.__x = 0
+        else:
+            self.__x = 0
+
+    def setY(self, y):
+        if type(y) == int or type(y) == float:
+            if y >= 0:
+                self.__y = y
+            else:
+                self.__y = 0
+        else:
+            self.__y = 0
+
+    def getX(self):
+        return self.__x
+
+    def getY(self):
+        return self.__y
+
+    def toString(self):
+        cadeaPunto = "As coordenadas do punto son: \n\t x = " + str(self.__x) + " \n\t y = " + str(self.__y)
+        return cadeaPunto
+
+    def __str__(self):
+        return self.toString()
+
+    def __eq__(self, other):
+        return self.__x == other.x and self.__y == other.y
+
+    x=property(getX, setX)
+    y=property(getY, setY)
+
+punto1 = Punto2(5, 3)
+punto2 = Punto2(7, 8)
+punto3 = Punto2(-2, 10)
+
+print(punto1)
+print(punto2)
+print(punto3)
+
+punto1.x = 10
+punto1.y = 15
+
+print("\nDespués de modificar punto1:")
+print(punto1)
+
+print("\nComparaciones:")
+print("punto1 == punto2:", punto1 == punto2)
+print("punto1 == punto1:", punto1 == punto1)
+
+
+#TOROIDE
+import math
+
+class Punto:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def distancia(self, otro):
+        return math.sqrt((self.x - otro.x)**2 + (self.y - otro.y)**2)
+
+    def toString(self):
+        return f"Punto: x = {self.x}, y = {self.y}"
+
+class Circulo(Punto):
+    def __init__(self, x, y, radio):
+        super().__init__(x, y)
+        self.radio = abs(radio)
+
+    def calcularArea(self):
+        return math.pi * self.radio ** 2
+
+    def tostring(self):
+        return super().toString() + f" \nRadio: {self.radio}"
+
+class Toroide(Circulo):
+    def __init__(self, x, y, radio, centro):
+        super().__init__(x, y, radio)
+        self.centroToroX = centro.x
+        self.centroToroY = centro.y
+
+    def cacularRadioMaior(self):
+        return self.distancia(Punto(self.centroToroX, self.centroToroY))
+
+    def calcularRadioMenor(self):
+        return self.radio
+
+    def calcularArea(self):
+        R = self.cacularRadioMaior()
+        r = self.calcularRadioMenor()
+        return 4 * math.pi**2 * R * r
+
+    def calcularVolume(self):
+        return 2 * math.pi * self.cacularRadioMaior() * self.calcularArea()
+
+c = Punto(0, 0)
+t = Toroide(3, 4, 2, c)
+
+print(f"Centro del toroide: ({t.centroToroX}, {t.centroToroY})")
+print(f"Radio mayor: {t.cacularRadioMaior():.2f}")
+print(f"Radio menor: {t.calcularRadioMenor():.2f}")
+print(f"Área del toroide: {t.calcularArea():.2f}")
+print(f"Volumen del toroide: {t.calcularVolume():.2f}")
+
+
+#FECHA DE UN AÑO METODO
+class DATA:
+    def __init__(self,dia,mes,ano):
+        self.setd(dia)
+        self.setm(mes)
+        self.seta(ano)
+
+    def setd(self, dia):
+        if dia <= 1 or dia > 31:
+            raise ValueError("El día debe estar entre 1 y 31")
+        self.dia = dia
+
+    def setm(self, mes):
+        if mes <= 1 or mes > 12:
+            raise ValueError("El mes debe estar entre 1 y 12")
+        self.mes = mes
+
+    def seta(self, ano):
+        if ano <= 0:
+            raise ValueError("El año debe ser mayor que 0")
+        self.ano = ano
+
+    def getd(self):
+        return self.dia
+
+    def getm(self):
+        return self.mes
+
+    def geta(self):
+        return self.ano
+
+    def validezdiames (self,dia,mes,ano):
+
+        if mes == 2:
+            if ano%4 == 0:
+                if dia <= 29:
+                    return True
+            else:
+                if dia <= 28:
+                    return True
+        elif mes % 2 == 0:
+            if dia <= 30:
+                return True
+        elif dia <= 31:
+            return True
+
+#RESOLUCIOOOOOOOOOOOOOOOOON
+from Data import DATA
+
+dia = int(input("Introduce el día: "))
+mes = int(input("Introduce el mes: "))
+ano = int(input("Introduce el año: "))
+
+fecha = DATA(dia, mes, ano)
+
+resultado = fecha.validezdiames(fecha.getd(), fecha.getm(), fecha.geta())
+
+if resultado == True:
+    print("La fecha es válida")
+    print("Día:", fecha.getd())
+    print("Mes:", fecha.getm())
+    print("Año:", fecha.geta())
+else:
+    print("Fecha inválida:", resultado)
+
+
+#ESFERA
+import math
+
+class Punto:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def toString(self):
+        return f"Punto: x = {self.x}, y = {self.y}"
+
+class Circulo(Punto):
+    def __init__(self, x, y, radio):
+        super().__init__(x, y)
+        self.radio = abs(radio)
+
+    def calcularArea(self):
+        return math.pi * (self.radio ** 2)
+
+    def calcularPerimetro(self):
+        return 2 * math.pi * self.radio
+
+    def tostring(self):
+        return super().toString() + f" \nRadio: {self.radio}"
+
+class Esfera(Circulo):
+    def __init__(self, x, y, radio):
+        super().__init__(x, y, radio)
+
+    def calcularArea(self):
+        return 4 * super().calcularArea()
+
+    def calcularVolume(self):
+        return (4/3) * math.pi * (self.radio ** 3)
+
+e = Esfera(0, 0, 3)
+print(e.tostring())
+print(f"Área de la esfera: {e.calcularArea():.2f}")
+print(f"Volumen de la esfera: {e.calcularVolume():.2f}")
+
+
+#COMPROBAR UNA HORA METODO
+class horas:
+    def __init__(self, horas, minutos,segundos):
+        self.hora = horas
+        self.minuto = minutos
+        self.segundo = segundos
+
+    def getmin(self):
+        return self.minuto
+    def gethoras(self):
+        return self.hora
+    def getsec(self):
+        return self.segundo
+
+    def sethoras(self,horas):
+        self.hora = horas % 24
+    def setsec(self,segundos):
+        self.segundo = segundos % 60
+    def setmin(self,minutos):
+        self.minuto = minutos % 60
+
+    def incrementarsec(self, massec):
+        total = self.segundo + massec
+        self.segundo = total % 60
+        masmin = (self.minuto + total // 60)
+        self.minuto = (self.minuto + total // 60) % 60
+        self.hora = (self.hora + masmin // 60) % 24
+
+    def incrementarmin(self, masmin):
+        total = self.minuto + masmin
+        self.minuto = total % 60
+        self.hora = (self.hora + total // 60) % 24
+
+    def incrementarh(self, mash):
+        self.hora = (self.hora + mash) % 24
+
+    def mostrarformato12h(self):
+        sufijo = "AM"
+        h = self.hora
+        if h == 0:
+            h = 12
+        elif h == 12:
+            sufijo = "PM"
+        elif h > 12:
+            h -= 12
+            sufijo = "PM"
+        return h, ":", self.minuto, ":", self.segundo, sufijo
+
+#RESOLUCIOOOOOOOOOOOOOOOOOON
+from hora import horas
+
+t = horas(int(input("hora: ")), int(input("minuto: ")), int(input("segundo:")))
+t.incrementarsec(int(input("suma segundos: ")))
+t.incrementarmin(int(input("añade minutos: ")))
+t.incrementarh(int(input("añade  horas:")))
+
+print(t.gethoras(), t.getmin(), t.getsec())
+
+print(t.mostrarformato12h())
+
+
+#VALIDACION DATOS DE UNA PERSONA
+class Persoa:
+    def __init__(self, nombre, edad, dni, direccion, nacionalidad):
+        self.nombre = nombre
+        if self.comprobarEdade(edad):
+            self.edad = edad
+        else:
+            self.edad = 0
+        if self.comprobarDni(dni):
+            self.dni = dni
+        else:
+            self.dni = "00000000X"
+        self.direccion = direccion
+        self.nacionalidad = nacionalidad
+
+    def comprobarEdade(self, edad):
+        if edad >= 0 or edad <= 150:
+            return True
+        else:
+            return False
+
+    def comprobarDni(self, dni):
+        if len(dni) == 9 and dni[:-1].isdigit() and dni[-1].isalpha():
+            letraDni = "TRWAGMYFPDXBNJZSQVHLCKE"
+            resto = int(dni[:-1]) % 23
+            if letraDni[resto] == dni[-1:].upper():
+                return True
+            else:
+                return False
+        else:
+            return False
+p = Persoa("Ana", 25, "12345678Z", "Calle Falsa 123", "Española")
+print(p.nombre)
+print(p.edad)
+print(p.dni)
+
+#EXAMEN 1111111111111111111111111111111
+def ejercicio1():
+    i = 0
+    lista = []
+    while i != 7:
+        c = int(input("Dime la temperatura media del dia "))
+        lista.append(c)
+        i = i+1
+    print(lista)
+
+def ejercicio2():
+    stem = 0
+    temp = 0
+    lista = [20,25,19,18,15,18,20]
+    for temp in lista:
+        stem =  stem + temp
+    mtemp = stem//7
+    print (mtemp)
+
+def ejercicio3():
+    stem = 0
+    temp = 0
+    lista = [20, 25, 19, 18, 15, 18, 20]
+    dias = 0
+    i = 0
+    for temp in lista:
+        stem = stem + temp
+    mtemp = stem / 7
+    while i != len(lista):
+        if lista[i] > mtemp:
+            dias = dias + 1
+            i = i + 1
+        else:
+            i = i + 1
+    print("hay ", dias, " que se supera la media de temperatura")
+
+def ejercicio4():
+    lista = [20, 25, 19, 18, 15, 18, 20]
+    temperatura = int(input("Temperatura de corte: "))
+    i = 0
+    for temp in lista:
+        i = i + 1
+        if temp > temperatura:
+            if i == 1:
+                dia = "lunes"
+                print (dia, temp)
+            elif i == 2:
+                dia = "martes"
+                print(dia, temp)
+            elif i == 3:
+                dia = "miercoles"
+                print(dia, temp)
+            elif i == 4:
+                dia = "jueves"
+                print(dia, temp)
+            elif i == 5:
+                dia = "viernes"
+                print(dia, temp)
+            elif i == 6:
+                dia = "sabado"
+                print(dia, temp)
+            elif i == 7:
+                dia = "domingo"
+                print(dia, temp)
+ejercicio = input("Ingresa ejercicio: ")
+if ejercicio == "1":
+    print(ejercicio1())
+elif ejercicio == "2":
+    print(ejercicio2())
+elif ejercicio == "3":
+    print(ejercicio3())
+elif ejercicio == "4":
+    print(ejercicio4())
+
+
+#EXAMEN 2222222222222222222222
+# 1.
+
+usuarioContrasinal = [["Manuel", "canMorto"], ["Pepe", "usuaya"]]
+
+def comprobar_usuario(lista_usuario_contrasinal):
+    existe_usuario = False
+    nome_usuario = input("Cal é o nome de usuario?: ")
+    contrasinal = input ("Cal é o contrasinal?: ")
+    for usuario_contrasinal in lista_usuario_contrasinal:
+        if usuario_contrasinal[0] == nome_usuario:
+            if usuario_contrasinal[1] == contrasinal:
+                existe_usuario = True
+
+    return existe_usuario
+
+existe = comprobar_usuario(usuarioContrasinal)
+if existe:
+    print("Usuario validado ")
+else:
+    print("Usuario ou contrasinal erroneo")
+
+
+# 2.
+
+def comprobar_caracteres(contrasinal):
+    if len(contrasinal) > 8:
+        return True
+    else:
+        return False
+
+if comprobar_caracteres("wefwefewfw"):
+    print("Maior que 8")
+else:
+    print("Menor que 8")
+
+
+# 3.
+
+def comprobar_maiusculas_contrasinal(contrasinal): # Opción 1
+    maiusculas = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+    for letra in contrasinal:
+        for maiuscula in maiusculas:
+            if maiuscula == letra:
+                return True
+
+
+def comprobar_maiusculas_contrasinal2(contrasinal): # Opción 2
+    maiusculas = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+    for letra in contrasinal:
+        if letra in maiusculas:
+            return True
+
+
+def comprobar_maiusculas_contrasinal3(contrasinal): # Opción 3
+    for letra in contrasinal:
+        if letra == letra.upper():
+            return True
+
+
+# 3.
+
+def comprobar_numero_contrasinal(contrasinal): # Opción 1
+    numeros = "0123456789"
+    for numero in contrasinal:
+        for existe in numeros:
+            if existe == numero:
+                return True
+
+
+def comprobar_numero_contrasinal2(contrasinal): # Opción 2
+    for caracter in contrasinal:
+        if caracter.isdecimal():
+            return True
+
+
+# 4.
+
+def comprobar_caracteres_especiais(contrasinal):
+    caracteres_especiais = "|@#$%&*_"
+    for caracter in contrasinal:
+        for especial in caracteres_especiais:
+            if caracter == especial:
+                return True
+
+
+# 5.
+
+def ver_caracter(contrasinal):
+    caracter_especial = "!@#$%&*_."
+    valido = False
+    for char in contrasinal:
+        if char in caracter_especial:
+            valido = True
+
+    return valido
+
+t1 = "abcd1"
+t2 = "A2!d"
+t3 = "#Bcd"
+t4 = "a1%&"
+print(ver_caracter(t1))
+print(ver_caracter(t2))
+print(ver_caracter(t3))
+print(ver_caracter(t4))
+
+
+# 6.
+
+def contraseña_valida():
+    nom = str(input("Ingresa tu nombre: "))
+    cont = str(input("Ingresa tu contraseña: "))
+    nome_cont = [nom, cont]
+    nome_contrasinal = []
+    caracteres = ["!","@","#","$","%","&","*","_","."]
+    valido = False
+    digit = False
+    mayus = False
+    carac = False
+    while valido == False and cont != "":
+        if len(cont) >= 8:
+            for char in cont:
+                if char.isdigit():
+                    digit = True
+                elif char in caracteres:
+                    carac = True
+                elif char == char.upper():
+                    mayus = True
+            valido = (digit and carac and mayus)
+        else:
+            print(False)
+            print("Contraseña invalida")
+            print("Numero:", digit)
+            print("Caracteres:", carac)
+            print("Mayus:", mayus)
+            cont = str(input("Ingresa tu contraseña: "))
+
+    nome_contrasinal.append(nome_cont)
+    return True
+
+print(contraseña_valida())
+K
