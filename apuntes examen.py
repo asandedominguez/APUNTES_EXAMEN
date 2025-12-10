@@ -386,7 +386,7 @@ caracteres = str(input("Dame una cadena de carcateres: "))
 def operacion(caracteres):
     list(caracteres)
     print(caracteres[:2])
-    print(caracteres[-3:])
+    print(caracteres[:3])
     print(caracteres[::2])
     print(caracteres+caracteres[::-1])
 operacion(caracteres)
@@ -1027,21 +1027,24 @@ print(passwd)
 
 #GENERADOR DE CONTRASEÑAS PIDIENDO YO EL DÍGITO:
 import random
-def contraseña(numero):
-    contra = ""
-    i = 0
-    while i < numero:
-        contra += chr(random.randint(33, 126))
-        i += 1
-    return contra
+def xeradorContrasinais(n):
+    l = ['1234567890', 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '!@#$%^&*()_+-=[]{};:,.<>/?']
+    i=0
+    contrasinal=''
+    while i<n:
+        tipo = random.randint(0,3)
+        iSim = random.randint(0,len(l[tipo])-1)
+        contrasinal = contrasinal + l[tipo][iSim]
+        i+=1
+    return contrasinal
 while True:
-    numero = int(input("Dime la longitud de la contraseña: "))
-    if 6 <= numero <= 12:
-        print("Contraseña generada:", contraseña(numero))
-    elif numero == 0:
+    n = int(input("Introduce un numero para xerar a lonxitude do contrasinal: "))
+    if n >= 6 and n <=12:
+        print(xeradorContrasinais(n))
+    elif n ==0:
         break
     else:
-        print("La longitud tiene que ser entre 6 y 12")
+        print("a lonxitude valida es entre 6 e 12")
 
 #LISTA DE LA COMPRA:
 list_compra = ['Limones', 'Naranjas', 'Queso', 'Pavo']
@@ -1097,130 +1100,3 @@ while frase[0] == " ":
     frase = frase[1:]
 frase = frase[::-1]
 print(frase)
-
-#find / index
-#Localizar subcadena
-#s.find('x'), s.index('x')
-
-#startswith / endswith
-#Comprobar inicio/fin
-#s.startswith('Hola')
-
-#format / f-strings
-#string formateada
-#f"Hola {name}", "{} {}".format(a,b)
-
-#Escapes / nuevas líneas
-#salto de línea, tab
-#\n, \t, \\
-
-#Modificar elemento
-#mi_lista[1] = 99
-#Cambiar el valor en una posición
-
-#mi_lista.append(4)
-#Agregar un elemento al final
-
-#mi_lista.insert(1, "nuevo")
-#Insertar un valor en una posición específica
-
-#mi_lista.remove(2)
-#Eliminar la primera ocurrencia de un valor
-#mi_lista.pop(0)
-#Eliminar y devolver el valor en una posición
-#mi_lista.clear()
-#Eliminar todos los elementos
-#copia = mi_lista.copy()
-#Crear una copia independiente
-#mi_lista.reverse()
-#Invertir el orden de los elementos
-#mi_lista.count(3)
-#Contar cuántas veces aparece un valor
-#mi_lista.index(3)
-#Obtener la posición de un valor
-#3 in mi_lista
-#Saber si un valor está en la lista
-#mi_lista[1:4]
-#lista[::-1] invierte
-#Obtener una sublista desde el índice 1 al 3
-#for x in mi_lista:
-#Iterar sobre todos los elementos
-#mi_tupla[0]
-#Obtener el primer elemento
-#mi_tupla.count(2)
-#Contar cuántas veces aparece un valor
-#mi_tupla.index(2)
-#Obtener la posición de un valor
-#2 in mi_tupla
-#Saber si un valor está en la tupla
-#mi_tupla[1:3]
-#Obtener una subtupla desde el índice 1 al 2
-#for x in mi_tupla:
-#Iterar sobre todos los elementos
-numero = float(input("Introduce un número: "))
-
-raiz = numero ** 0.5
-raiz_entera = round(raiz)
-resto = numero -(raiz_entera ** 2)
-
-print("Número:", numero)
-print("Raíz cuadrada aproximada:", raiz)
-print("Raíz cuadrada entera más cercana:", raiz_entera)
-print("Resto (diferencia con su cuadrado):", resto)
-def main():
-    hora = int(input("Introduce las horas: "))
-    minuto = int(input("Introduce los minutos: "))
-    segundo = int(input("Introduce los segundos: "))
-    segundos_mas = int(input(f"Introduce los segundos que le quieres añadir a la hora ({hora}:{minuto}:{segundo}): "))
-
-    while segundos_mas >= 60:
-        minuto += 1
-        segundos_mas -= 60
-
-    while segundo + segundos_mas >= 60:
-        segundo = segundo + segundos_mas - 60
-        minuto += 1
-        segundos_mas = 0
-
-    segundo += segundos_mas
-
-    while minuto >= 60:
-        minuto -= 60
-        hora += 1
-
-    print(f"La hora actual es: {hora}:{minuto}:{segundo}")
-
-if __name__ == "__main__":
-    main()
-
-def main():
-    n = int(input("Escriba un número natural para saber su raíz cuadrada entera y su resto (si lo tiene): "))
-
-    if n < 0:
-        print("Error: la raíz cuadrada no está definida para números negativos.")
-        return
-
-    raiz_entera = 0
-    while (raiz_entera + 1) ** 2 <= n:
-        raiz_entera += 1
-
-    cuadrado = raiz_entera ** 2
-    resto = n - cuadrado
-
-    if resto == 0:
-        print(f"La raíz cuadrada de {n} es exacta: {raiz_entera}")
-    else:
-        print(f"La raíz entera más cercana de {n} es: {raiz_entera}")
-        print(f"El cuadrado de {raiz_entera} es: {cuadrado}")
-        print(f"El resto es: {resto}")
-
-if __name__ == "__main__":
-    main()
-
-
-
-
-
-
-
-
