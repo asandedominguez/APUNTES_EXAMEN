@@ -1109,96 +1109,82 @@ print(frase)
 #COMPROBAR AÑO CORRECTO:
 class Data:
     def __init__(self, day, month, year):
-        self.__day = None
-        self.__month = None
-        self.__year = None
+        self.day = None
+        self.month = None
+        self.year = None
 
         self.setAno(year)
         self.setMes(month)
         self.setDia(day)
 
     def setDia(self, day):
-        diasmes = {
-            1: 31, 2: 28, 3: 31, 4: 30,
-            5: 31, 6: 30, 7: 31, 8: 31,
-            9: 30, 10: 31, 11: 30, 12: 31
-        }
+        dias_mes = {1:31, 2:28, 3:31, 4: 30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
 
-        if self.__month is None or self.__year is None:
-            self.__day = None
+        if self.month is None or self.year is None:
+            self.day = None
             return
 
-        if self.__month == 2 and self.eBisiesto(self.__year):
-            if 1 <= day <= 29:
-                self.__day = day
+        if self.month == 2 and self.bisiesto(self.year):
+            if 1 <= day <=29:
+                self.day = day
             else:
-                self.__day = None
+                self.day = None
         else:
-            if 1 <= day <= diasmes[self.__month]:
-                self.__day = day
+            if 1<= day <= dias_mes[self.month]:
+                self.day = day
             else:
-                self.__day = None
+                self.day = None
 
     def getDia(self):
-        return self.__day
+        return self.day
 
     def setMes(self, month):
-        if 1 <= month <= 12 and self.__year is not None:
-            self.__month = month
+        if 1 <= month <= 12:
+            self.month = month
         else:
-            self.__month = None
-
-    def getMes(self):
-        return self.__month
+            self.month = None
 
     def setAno(self, year):
         if year >= 0:
-            self.__year = year
+            self.year = year
         else:
-            self.__year = None
+            self.year = None
 
     def getAno(self):
-        return self.__year
+        return self.year
 
-    def eBisiesto(self, year):
-        if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    def bisiesto(self, year):
+        if (year % 4 == 0 and year % 100 != 0) or (year%400==0):
             return True
         return False
 
-    def esFechaValida(self):
-        if self.__day is None or self.__month is None or self.__year is None:
+    def validar(self):
+        if self.day is None or self.month is None or self.year is None:
             return False
 
-        diasmes = {
-            1: 31, 2: 28, 3: 31, 4: 30,
-            5: 31, 6: 30, 7: 31, 8: 31,
-            9: 30, 10: 31, 11: 30, 12: 31
+        dias_mes = {
+            1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31
         }
-
-        if self.__month == 2 and self.eBisiesto(self.__year):
-            return self.__day <= 29
-
-        return self.__day <= diasmes[self.__month]
+        if self.month == 2 and self.bisiesto(self.year):
+            return self.day <= 29
+        return self.day <= dias_mes[self.month]
 
     def __str__(self):
-        return f"A data é {self.__day}/{self.__month}/{self.__year}"
-
+        return f"La fecha será {self.day}/{self.month}/{self.year}"
 
 fechas = [
-    Data(29, 2, 2024),
-    Data(29, 2, 2023),
-    Data(31, 4, 2023),
-    Data(15, 10, 2023),
+    Data(29,2,2024),
+    Data(29,2,2023),
+    Data(31,4,2023),
+    Data(15,10,2023),
 ]
-
-for f in fechas:
-    print(f)
-    if f.esFechaValida():
-        print("✅ Fecha válida")
+for i in fechas:
+    print(i)
+    if i.validar():
+        print("Fecha valida")
     else:
-        print("❌ Fecha inválida")
-    print("---")
-
+        print("Fecha invalida")
+    print("-------")
 
 #BOMBILLA (ON-OFF) ESTADO DE ALGO METODO
 class Bombilla:
