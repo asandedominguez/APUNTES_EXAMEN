@@ -1903,3 +1903,188 @@ def contraseña_valida():
     return True
 
 print(contraseña_valida())
+
+#CLASE LIRBO EJERCICIO 1:
+class libro:
+    def __init__(self, titulo, autor, ano, numPaginas, valoracion):
+        self.titulo = titulo
+        self.autor = autor
+        self.ano = ano
+        self.numPaginas = numPaginas
+        self.valoracion = valoracion
+
+    def o_titulo(self):
+        return self.titulo
+    def o_autor(self):
+        return self.autor
+    def o_ano(self):
+        return self.ano
+    def o_numPaginas(self):
+        return self.numPaginas
+    def o_valoracion(self):
+        return self.valoracion
+    def completo(self):
+        return (f"Título: {self.titulo} \n"
+                f"Autor: {self.autor} \n"
+                f"Ano: {self.ano} \n"
+                f"Num Paginas: {self.numPaginas} \n"
+                f"Valoracion: {self.valoracion}")
+
+def main():
+    libros = libro("El señor de los anillos", "J.R.R Tolkien", 1954, 1200, 9.5)
+    print(libros.completo())
+    libros.valoracion = 9.8
+    print("\n Despues de modificar la valoración")
+    print(libros.completo())
+if __name__ == "__main__":
+    main()
+
+
+#CLASE CONSUMO EJERCICIO 2:
+class Consumo:
+    def __init__(self, km, litros, vMed, pGas):
+        self.km = km
+        self.litros = litros
+        self.vMed = vMed
+        self.pGas = pGas
+
+    def get_km(self):
+        return self.km
+    def get_litros(self):
+        return self.litros
+    def get_vMed(self):
+        return self.vMed
+    def get_pGas(self):
+        return self.pGas
+    def set_km(self, km):
+        if km >= 0:
+            self.km = km
+
+    def set_litros(self, litros):
+        if litros >= 0:
+            self.litros = litros
+    def set_vMed(self, vMed):
+        if vMed >= 0:
+            self.vMed = vMed
+    def set_pGas(self, pGas):
+        if pGas >= 0:
+            self.pGas = pGas
+    def getTiempo(self):
+        if self.vMed > 0:
+            return self.km / self.vMed
+        return 0
+    def consumoMedio(self):
+        if self.km > 0:
+            return (self.litros / self.km) * 100
+        return 0
+    def consumoEuros(self):
+        return self.consumoMedio() * self.pGas
+
+consumo1 = Consumo(0, 0, 0, 0)
+consumo1.set_litros(50)
+consumo1.set_pGas(1.57)
+consumo2 = Consumo(400, 30, 90, 1.57)
+print(consumo2.consumoMedio())
+consumo2.set_litros(40)
+print(consumo2.get_vMed())
+
+
+#CLASE COCHE EJERCICIO 3:
+class Coche:
+    def __init__(self):
+        self.velocidade = 0
+
+    def getVelocidade(self):
+        return self.velocidade
+
+    def acelerar(self,valor):
+        self.velocidade =  self.velocidade + valor
+        print(f"Acelerando {valor} km/h. Velocidade actual: {self.velocidade} km/h")
+
+    def frenar(self, menos):
+        self.velocidade = self.velocidade - menos
+        if self.velocidade < 0:
+            self.velocidade = 0
+        print(f"Frenando {menos} km/h. Velocidade actual: {self.velocidade} km/h")
+
+class Boletin9_3:
+    def __init__(self):
+        coche2 = Coche()
+        print("Velocidade inicial:", coche2.getVelocidade(), "km/h")
+        coche2.acelerar(50)
+        coche2.acelerar(20)
+        coche2.frenar(30)
+        coche2.frenar(70)
+        print("Velocidade final:", coche2.getVelocidade(), "km/h")
+
+def main():
+    Boletin9_3()
+if __name__ == "__main__":
+    main()
+
+
+#CLASE CONTA EJERCICIO 4
+class Conta:
+    def __init__(self, nome, numero, tipo, saldo):
+        self.nome = nome
+        self.numero = numero
+        self.tipo = tipo
+        self.saldo = saldo
+
+    def get_nome(self):
+        return self.nome
+    def get_numero(self):
+        return self.numero
+    def get_tipo(self):
+        return self.tipo
+    def get_saldo(self):
+        return self.saldo
+    def set_nome(self, nome):
+        self.nome = nome
+    def set_numero(self, numero):
+        self.numero = numero
+    def set_tipo(self, interese):
+        self.tipo = interese
+    def set_saldo(self, saldo):
+        if saldo >= 0:
+            self.saldo = saldo
+        else:
+            print("El saldo debe ser positivo")
+
+    def ingreso(self, cantidade):
+        if cantidade > 0:
+            self.saldo += cantidade
+        else:
+            print("La cantidad debe ser positiva")
+
+    def reintegro(self, cantidade):
+        if cantidade > 0:
+            if cantidade <= self.saldo:
+                self.saldo -= cantidade
+            else:
+                print("Saldo insuficiente.")
+        else:
+            print("La cantidad debe ser positiva")
+
+    def transferencia(self, conta_destino, importe):
+        if importe > 0:
+            if importe <= self.saldo:
+                self.saldo -= importe
+                conta_destino.ingreso(importe)
+                print("Transferencia realizada con éxito.")
+            else:
+                print("Saldo insuficiente")
+        else:
+            print("El importe debe ser positivo")
+
+conta1 = Conta("Ana", "ES123456", 1.5, 1000)
+conta2 = Conta("Luis", "ES654321", 1.2, 500)
+print("Saldo inicial Ana:", conta1.get_saldo())
+print("Saldo inicial Luis:", conta2.get_saldo())
+conta1.ingreso(200)
+print("Saldo de Ana tras ingreso:", conta1.get_saldo())
+conta1.reintegro(150)
+print("Saldo de Ana tras reintegro:", conta1.get_saldo())
+conta1.transferencia(conta2, 300)
+print("Saldo final Ana:", conta1.get_saldo())
+print("Saldo final Luis:", conta2.get_saldo())
